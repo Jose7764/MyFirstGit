@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Playground Divertido 🎉</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Comic Sans MS', sans-serif;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      background: linear-gradient(135deg, #f6d365 0%, #fda085 100%);
+      transition: background 0.5s ease;
+      overflow: hidden;
+    }
+
+    h1 {
+      font-size: 3rem;
+      color: #fff;
+      margin-bottom: 1rem;
+      text-shadow: 2px 2px #00000030;
+    }
+
+    #quote {
+      font-size: 1.5rem;
+      color: #fff;
+      margin: 1rem;
+      text-align: center;
+      max-width: 600px;
+    }
+
+    .button {
+      padding: 1rem 2rem;
+      margin: 0.5rem;
+      border: none;
+      border-radius: 20px;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: transform 0.2s ease, background 0.3s ease;
+    }
+
+    .button:hover {
+      transform: scale(1.05);
+    }
+
+    .color-btn {
+      background-color: #ff6b81;
+      color: white;
+    }
+
+    .quote-btn {
+      background-color: #6c5ce7;
+      color: white;
+    }
+
+    .chaos-btn {
+      background-color: #00cec9;
+      color: white;
+    }
+
+    .emoji {
+      position: absolute;
+      font-size: 2rem;
+      animation: float 4s ease-in-out infinite;
+      pointer-events: none;
+    }
+
+    @keyframes float {
+      0% {
+        transform: translateY(0) rotate(0deg);
+        opacity: 1;
+      }
+      100% {
+        transform: translateY(-100vh) rotate(360deg);
+        opacity: 0;
+      }
+    }
+
+    .shake {
+      animation: shake 0.5s;
+    }
+
+    @keyframes shake {
+      0% { transform: translate(1px, 1px) rotate(0deg); }
+      20% { transform: translate(-2px, -3px) rotate(-1deg); }
+      40% { transform: translate(-1px, 2px) rotate(1deg); }
+      60% { transform: translate(2px, 1px) rotate(0deg); }
+      80% { transform: translate(-1px, -1px) rotate(1deg); }
+      100% { transform: translate(1px, -2px) rotate(-1deg); }
+    }
+  </style>
+</head>
+<body>
+  <h1>🎉 Bem-vindo ao Playground! 🎈</h1>
+  <div id="quote">Clique abaixo para se divertir!</div>
+  <button class="button color-btn" onclick="changeBackground()">Mudar Fundo 🌈</button>
+  <button class="button quote-btn" onclick="showRandomQuote()">Nova Frase 🤪</button>
+  <button class="button chaos-btn" onclick="activateChaos()">Modo Caos 💥</button>
+
+  <script>
+    const quotes = [
+      "Não confie em átomos, eles fazem tudo!",
+      "Café não resolve, mas ajuda!",
+      "Sem bugs, sem diversão.",
+      "404: motivação não encontrada.",
+      "A vida é curta. Coma a sobremesa primeiro.",
+      "Quando tudo falhar, reinicie."
+    ];
+
+    function changeBackground() {
+      const colors = ['#f6d365', '#fda085', '#74b9ff', '#55efc4', '#ffeaa7', '#fab1a0', '#fd79a8'];
+      const color1 = colors[Math.floor(Math.random() * colors.length)];
+      const color2 = colors[Math.floor(Math.random() * colors.length)];
+      document.body.style.background = `linear-gradient(135deg, ${color1}, ${color2})`;
+    }
+
+    function showRandomQuote() {
+      const randomIndex = Math.floor(Math.random() * quotes.length);
+      document.getElementById("quote").textContent = quotes[randomIndex];
+    }
+
+    function activateChaos() {
+      document.body.classList.add('shake');
+      for (let i = 0; i < 20; i++) {
+        const emoji = document.createElement('div');
+        emoji.textContent = ["🎉", "😂", "🔥", "🌈", "🤖", "💥", "🦄"][Math.floor(Math.random() * 7)];
+        emoji.classList.add("emoji");
+        emoji.style.left = Math.random() * 100 + "vw";
+        emoji.style.top = "100vh";
+        emoji.style.animationDuration = (2 + Math.random() * 3) + "s";
+        document.body.appendChild(emoji);
+        setTimeout(() => emoji.remove(), 4000);
+      }
+      setTimeout(() => document.body.classList.remove('shake'), 500);
+    }
+  </script>
+</body>
+</html>
